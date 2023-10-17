@@ -13,3 +13,7 @@ select{
 .limit__remaining__text{
     font-size: 16px;
 }
+
+.limit__input{
+    width: 100px;
+}

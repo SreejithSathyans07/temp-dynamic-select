@@ -19,11 +19,11 @@
             <input type="text">
         </div> -->
 
-        <button class="btn btn-primary mb-3" ng-click="addPerson()">Add Person</button>
+        <button class="btn btn-primary mb-3" ng-click="addPerson()">+ Add Person</button>
         <div class="row__{{$index}} mb-2" ng-repeat="person in textBoxData track by $index">
             <select class="select__{{$index}}" ng-model="selectedName" name="" id="" ng-options="x.name for x in metaData" value="{{x}}"
                 ng-change="updateData($index)"></select>
-            <input class="limit__{{$index}}" type="text" ng-keyup="inputChanged($index)">
+            <input maxlength="3" class="limit__input limit__{{$index}}" type="text" ng-keyup="inputChanged($index)">
             <label for="" hidden class="limit__value__{{$index}}"></label>
             <label class="limit__remaining__text limit__remaining__{{$index}}" for="">remaining amount : </label>
         </div>

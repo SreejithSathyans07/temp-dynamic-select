@@ -2,18 +2,16 @@ var app = angular.module('myApp', []);
 
 app.controller('mainController', ['$scope', function($scope){
     $scope.metaData = [
-        {id: 1,name: 'Raghu', adult: true, limit:500},
-        {id: 2,name: 'Rani', adult: true, limit:500},
-        {id: 3,name: 'Gowri', adult: true, limit:300},
-        {id: 4,name: 'Rajesh', adult: true, limit:300},
+        {id: 1,name: 'Raghu [A]', adult: true, limit:500},
+        {id: 2,name: 'Rani [A]', adult: true, limit:500},
+        {id: 3,name: 'Gowri [C]', adult: true, limit:300},
+        {id: 4,name: 'Rajesh [C]', adult: true, limit:300},
     ]
 
     $scope.setFirstPerson = function(){
         return $scope.metaData[0]
     }
      
-    $scope.selectedName;
-
     $scope.textBoxData = [$scope.setFirstPerson()];
 
     $scope.addPerson = function(){
@@ -23,6 +21,8 @@ app.controller('mainController', ['$scope', function($scope){
 
     $scope.updateData = function(index){
         const selectedPerson = $scope.getSelectedPerson(index);
+        $scope.setRemainingValue(index, selectedPerson.limit, 0);
+        $scope.resetLimitEntered(index);
         $scope.populateLimit(index, selectedPerson);
         console.log(selectedPerson)
     }
@@ -43,14 +43,18 @@ app.controller('mainController', ['$scope', function($scope){
         const maxVal = +document.querySelector(`.limit__value__${index}`).value;
         let valueEntered = +document.querySelector(`.limit__${index}`).value;
         if(valueEntered > maxVal){
-            document.querySelector(`.limit__${index}`).value = '';
+            $scope.resetLimitEntered(index)
             valueEntered = 0;
         }
-        const remainingAmount = maxVal - valueEntered;
-        console.log(remainingAmount);
-        document.querySelector(`.limit__remaining__${index}`).innerHTML = 'remaining amount :' + remainingAmount + '/' + maxVal;
-
+        $scope.setRemainingValue(index, maxVal, valueEntered);
     }
 
+    $scope.setRemainingValue = function(index, maxVal, newValue){
+        const remainingAmount = maxVal - newValue;
+        document.querySelector(`.limit__remaining__${index}`).innerHTML = 'remaining amount :' + remainingAmount + '/' + maxVal;
+    }
 
+    $scope.resetLimitEntered = function(index){
+        document.querySelector(`.limit__${index}`).value = '';
+    }
 }])
