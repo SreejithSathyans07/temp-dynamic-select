@@ -4,8 +4,8 @@ app.controller('mainController', ['$scope', function($scope){
     $scope.metaData = [
         {id: 1,name: 'Raghu [A]', adult: true, limit:500},
         {id: 2,name: 'Rani [A]', adult: true, limit:500},
-        {id: 3,name: 'Gowri [C]', adult: true, limit:300},
-        {id: 4,name: 'Rajesh [C]', adult: true, limit:300},
+        {id: 3,name: 'Gowri [C]', adult: false, limit:300},
+        {id: 4,name: 'Rajesh [C]', adult: false, limit:300},
     ]
 
     $scope.setFirstPerson = function(){
